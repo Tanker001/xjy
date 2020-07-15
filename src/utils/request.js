@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const request = axios.create({
   // 接口的基准路径
-  baseURL: 'xxxx'
+  baseURL: 'http://localhost:3000/'
 })
 
 // 请求拦截器
