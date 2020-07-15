@@ -1,6 +1,6 @@
 <!-- 商铺管理 -->
 <template>
-  <div></div>
+  <div>商铺管理</div>
 </template>
 
 <script>
