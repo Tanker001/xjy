@@ -4,6 +4,8 @@ import Home from '../views/Home/homepage.vue'
 import Login from '../views/Login'
 import ShopManagement from '../views/shopManagement'
 import Welcome from '../views/welcome'
+import CurrencyCoupon from '@/views/Couponmanagement/currencyCoupon.vue'
+import ShopCoupon from '@/views/Couponmanagement/shopCoupon.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,6 +26,14 @@ const routes = [
       {
         path: '/shopManagement',
         component: ShopManagement
+      },
+      {
+        path: '/currencyCoupon',
+        component: CurrencyCoupon
+      },
+      {
+        path: '/shopCoupon',
+        component: ShopCoupon
       }
     ]
   }
