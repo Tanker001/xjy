@@ -6,26 +6,32 @@ import ShopManagement from '../views/shopManagement'
 import Welcome from '../views/welcome'
 Vue.use(VueRouter)
 
-const routes = [{
-  path: '/',
-  name: 'login',
-  component: Login
-}, {
-  path: '/home',
-  component: Home,
-  redirect: '/welcome',
-  children: [{
-    path: '/welcome',
-    component: Welcome
-  }, {
-    path: '/shopManagement',
-    component: ShopManagement
-  }]
-}]
+const routes = [
+  {
+    path: '/',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/home',
+    component: Home,
+    redirect: '/welcome',
+    children: [
+      {
+        path: '/welcome',
+        component: Welcome
+      },
+      {
+        path: '/shopManagement',
+        component: ShopManagement
+      }
+    ]
+  }
+]
 
 const originalPush = VueRouter.prototype.push
-   VueRouter.prototype.push = function push(location) {
-   return originalPush.call(this, location).catch(err => err)
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
 }
 
 const router = new VueRouter({
