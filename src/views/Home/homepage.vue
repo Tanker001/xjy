@@ -117,11 +117,11 @@ export default {
         {
           id: 7,
           authName: '素材库管理',
-          path: 'shop',
+          path: 'rrrrr',
           children: [
-            { id: 71, authName: '官方素材库', path: 'shopInfo' },
-            { id: 72, authName: '素材审核', path: 'shopStyle' },
-            { id: 73, authName: '用户素材管理', path: 'shopStyle' }
+            { id: 71, authName: '官方素材库', path: 'qqqqq' },
+            { id: 72, authName: '素材审核', path: 'wwwww' },
+            { id: 73, authName: '用户素材管理', path: 'eeeee' }
           ]
         },
         {
