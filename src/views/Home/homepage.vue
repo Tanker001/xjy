@@ -20,7 +20,7 @@
           :default-active="activePath"
         >
           <!-- 一级菜单 -->
-          <el-menu-item  :index="'/welcome'">
+          <el-menu-item :index="'/welcome'">
             <template slot="title">
               <!-- 图标 -->
               <!-- <i :class="iconarr[index]"></i> -->
@@ -74,7 +74,7 @@ export default {
           authName: '店铺管理',
           path: 'shop',
           children: [
-            { id: 11, authName: '店铺列表', path: 'shopInfo' },
+            { id: 11, authName: '店铺列表', path: 'shopManagement' },
             { id: 12, authName: '商品列表', path: 'shopStyle' },
             { id: 13, authName: '开店审核', path: 'shopRights' },
             { id: 14, authName: '店铺权益设置', path: 'shopRights' },
@@ -117,11 +117,11 @@ export default {
         {
           id: 7,
           authName: '素材库管理',
-          path: 'shop',
+          path: 'rrrrr',
           children: [
-            { id: 71, authName: '官方素材库', path: 'shopInfo' },
-            { id: 72, authName: '素材审核', path: 'shopStyle' },
-            { id: 73, authName: '用户素材管理', path: 'shopStyle' }
+            { id: 71, authName: '官方素材库', path: 'qqqqq' },
+            { id: 72, authName: '素材审核', path: 'wwwww' },
+            { id: 73, authName: '用户素材管理', path: 'eeeee' }
           ]
         },
         {
@@ -151,7 +151,9 @@ export default {
         4: 'iconfont icon-danju',
         5: 'iconfont icon-baobiao'
       },
-      activePath: ''
+      activePath: '',
+      additemlist: ['主页'],
+      editableTabsValue: 0
     }
   },
   created() {},

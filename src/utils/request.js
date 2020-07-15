@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const request = axios.create({
   // 接口的基准路径
+<<<<<<< HEAD
   baseURL: 'xxxx'
 })
 
@@ -25,4 +26,9 @@ request.interceptors.request.use(function (config) {
   // 如果请求出错了（还没有发出去）会进入这里
   return Promise.reject(error)
 })
+=======
+  baseURL: 'http://localhost:8080/'
+})
+
+>>>>>>> 9bc2009a39ea964c4105f5cf99532a5864840ed8
 export default request

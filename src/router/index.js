@@ -8,6 +8,7 @@ import CurrencyCoupon from '@/views/Couponmanagement/currencyCoupon.vue'
 import ShopCoupon from '@/views/Couponmanagement/shopCoupon.vue'
 Vue.use(VueRouter)
 
+<<<<<<< HEAD
 const routes = [
   {
     path: '/',
@@ -38,6 +39,30 @@ const routes = [
     ]
   }
 ]
+=======
+const routes = [{
+  path: '/',
+  name: 'login',
+  component: Login
+}, {
+  path: '/home',
+  component: Home,
+  redirect: '/welcome',
+  children: [{
+    path: '/welcome',
+    component: Welcome
+  }, {
+    path: '/shopManagement',
+    component: ShopManagement
+  },
+  {
+    path: '/qqqqq',
+    component:
+      () => import('@/views/Ordermanagement')
+  }
+  ]
+}]
+>>>>>>> 9bc2009a39ea964c4105f5cf99532a5864840ed8
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
