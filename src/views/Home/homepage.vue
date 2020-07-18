@@ -105,8 +105,8 @@ export default {
           authName: '优惠券管理',
           path: 'shop',
           children: [
-            { id: 51, authName: '通用优惠券', path: 'shopInfo' },
-            { id: 52, authName: '店铺优惠券', path: 'shopStyle' }
+            { id: 51, authName: '通用优惠券', path: 'currencyCoupon' },
+            { id: 52, authName: '店铺优惠券', path: 'shopCoupon' }
           ]
         },
         {

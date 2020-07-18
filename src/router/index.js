@@ -5,6 +5,11 @@ import Login from '../views/Login'
 import ShopManagement from '../views/shopManagement'
 import Welcome from '../views/welcome'
 import Shopdetails from '../views/shopManagement/Shopdetails.vue'
+import CurrencyCoupon from '@/views/Couponmanagement/currencyCoupon.vue'
+import ShopCoupon from '@/views/Couponmanagement/shopCoupon.vue'
+import AddCoupon from '@/views/Couponmanagement/addCoupon.vue'
+import EditCoupon from '@/views/Couponmanagement/editCoupon.vue'
+
 Vue.use(VueRouter)
 
 const routes = [{
@@ -32,10 +37,24 @@ const routes = [{
     }, {
       path: '/shopStyle',
       component: () => import('@/views/shopManagement/shopStyle')
+    }, {
+      path: '/currencyCoupon',
+      component: CurrencyCoupon
+    },
+    {
+      path: '/currencyCoupon/addcoupon',
+      component: AddCoupon
+    },
+    {
+      path: '/currencyCoupon/editcoupon',
+      component: EditCoupon
+    },
+    {
+      path: '/shopCoupon',
+      component: ShopCoupon
     }
   ]
 }]
-
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
