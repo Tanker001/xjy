@@ -133,7 +133,8 @@ module.exports = {
             'time_limit|7-15': 1,
             'receive|0-3': 1,
             'cou_total|1000-3000': 1,
-            'receive_money|5000-9000': 1
+            'receive_money|5000-9000': 1,
+            'id|+1': 1
           }
         ]
       }
@@ -148,6 +149,21 @@ module.exports = {
         res.json({
           code: 200,
           message: '添加用户成功',
+          data: user
+        })
+      }
+    },
+    {
+      type: 'get',
+      // 支持动态路由参数
+      url: '/currencyCoupon/:id',
+      handle(req, res) {
+        const { id } = req.params
+        // 根据 id 查找用户
+        const user = service.find(id)
+        res.json({
+          code: 200,
+          message: '获取用户信息成功',
           data: user
         })
       }

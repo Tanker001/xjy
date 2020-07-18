@@ -12,7 +12,7 @@
       <!-- //顶部搜索区域 -->
       <div>
         <span>优惠券：</span>
-        <el-input placeholder="请输入优惠券名称" suffix-icon="el-icon-search" clearable></el-input>
+        <el-input placeholder="请输入优惠券名称" v-model="query" suffix-icon="el-icon-search" clearable></el-input>
         <span class="riqi">日期：</span>
         <el-date-picker
           type="daterange"
@@ -20,21 +20,17 @@
           start-placeholder="开始日期"
           end-placeholder="结束日期"
         ></el-date-picker>
-        <el-button class="chaxun-btn">查询</el-button>
-        <el-button>重置</el-button>
+        <el-button class="chaxun-btn" @click="chaxunCou">查询</el-button>
+        <el-button @click="chongzhi">重置</el-button>
       </div>
       <!-- 顶部搜索区域//-->
 
       <!-- //新增优惠券 -->
       <div class="addyouhui">
-        <el-button
-          type="primary"
-          size="mini"
-          @click="$router.push('/currencyCoupon/addcoupon')"
-        >新增优惠券</el-button>
+        <el-button type="primary" size="mini" @click="sssssss">新增优惠券</el-button>
 
-        <span class="xiangqing">发放总数量：张</span>
-        <span class="lqjinge">领取总金额：元</span>
+        <!-- <span class="xiangqing">发放总数量：张</span>
+        <span class="lqjinge">领取总金额：元</span>-->
       </div>
       <!-- 新增优惠券// -->
 
@@ -51,9 +47,10 @@
         <el-table-column prop="receive" label="领取限制/张"></el-table-column>
         <el-table-column prop="cou_total" label="发放总数量/张"></el-table-column>
         <el-table-column prop="receive_money" label="领取金额/元"></el-table-column>
-        <el-table-column label="操作">
-          <el-button type="primary">编辑</el-button>
-          <el-button type="danger">删除</el-button>
+        <el-table-column label="操作" #default="{ row }">
+          <!-- {{ row }} -->
+          <el-button type="primary" @click="editCou(row)">编辑</el-button>
+          <el-button type="danger" @click="deleteCou(row.id)">删除</el-button>
         </el-table-column>
       </el-table>
       <!-- 表格区域// -->
@@ -62,12 +59,14 @@
 </template>
 
 <script>
-import { getCurrencyCouponList } from '@/api/goods.js'
+import { getCurrencyCouponList, getCouponId } from '@/api/goods.js'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   data() {
     return {
-      couponList: []
+      couponList: [],
+      query: ''
     }
   },
   methods: {
@@ -76,10 +75,36 @@ export default {
       console.log(res)
       this.couponList = res.data
       // console.log(this.couponList.name)
+      this.couponList.push(this.addFormArr)
+    },
+    async chaxunCou() {
+      const { data: res } = await getCouponId()
+      console.log(res)
+    },
+    chongzhi() {
+      this.query = ''
+    },
+    deleteCou(id) {
+      console.log(id)
+      this.couponList = this.couponList.filter(v => v.id !== id)
+    },
+    editCou(row) {
+      this.$router.push('/currencyCoupon/editcoupon')
+      // console.log(row)
+      this.$store.commit('setEditForm', row)
+    },
+    sssssss() {
+      this.$router.push('/currencyCoupon/addcoupon')
     }
+  },
+  computed: {
+    ...mapState(['addFormArr']),
+    ...mapMutations(['editFromArr'])
   },
   mounted() {
     this.setCurrencyCouponList()
+    // console.log(this.addFormArr)
+    console.log(this.couponList)
   }
 }
 </script>

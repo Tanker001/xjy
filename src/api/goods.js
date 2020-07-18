@@ -12,3 +12,8 @@ export const addCoupon = () => {
 export const getCouponList = () => {
   return request.get('/coupon/getCouponList')
 }
+
+// 查询
+export const getCouponId = id => {
+  return request.get(`/currencyCoupon/${id}`)
+}

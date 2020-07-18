@@ -7,6 +7,7 @@ import Welcome from '../views/welcome'
 import CurrencyCoupon from '@/views/Couponmanagement/currencyCoupon.vue'
 import ShopCoupon from '@/views/Couponmanagement/shopCoupon.vue'
 import AddCoupon from '@/views/Couponmanagement/addCoupon.vue'
+import EditCoupon from '@/views/Couponmanagement/editCoupon.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,10 @@ const routes = [
       {
         path: '/currencyCoupon/addcoupon',
         component: AddCoupon
+      },
+      {
+        path: '/currencyCoupon/editcoupon',
+        component: EditCoupon
       },
       {
         path: '/shopCoupon',

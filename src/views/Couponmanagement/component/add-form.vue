@@ -21,16 +21,18 @@
     <el-form-item label="账号领取上限" prop="receive">
       <el-input v-model="addCouForm.receive"></el-input>
     </el-form-item>
-
+    <el-form-item label="发放总数量" prop="cou_total">
+      <el-input v-model="addCouForm.cou_total"></el-input>
+    </el-form-item>
     <!-- 按钮区域 -->
-
     <el-button type="primary" @click="addCou">提交</el-button>
     <el-button type="info" @click="$router.back()">返回优惠券列表</el-button>
   </el-form>
 </template>
 
 <script>
-import { addCoupon } from '@/api/goods.js'
+import { mapMutations, mapState } from 'vuex'
+// import { addCoupon } from '@/api/goods.js'
 
 export default {
   data() {
@@ -40,8 +42,10 @@ export default {
         money: '',
         limit: '',
         time_limit: '',
-        receive: ''
+        receive: '',
+        cou_total: ''
       },
+      addArr: {},
       addCouRules: {
         name: [
           {
@@ -89,15 +93,32 @@ export default {
             message: '请输入账号领取上限',
             trigger: ['blur', 'change']
           }
+        ],
+        cou_total: [
+          {
+            required: true,
+            message: '请输入发放总数量',
+            trigger: ['blur', 'change']
+          }
         ]
       }
     }
   },
+  computed: {
+    ...mapMutations(['addFormArr']),
+    ...mapState(['editFromArr'])
+  },
   methods: {
+    // ...mapMutations(['addCou']),
     async addCou() {
-      const { data: res } = await addCoupon()
-      console.log(res)
+      this.addArr = this.addCouForm
+      console.log(this.addArr, '添加成功')
+      this.$store.commit('setAddForm', this.addArr)
+      this.$router.push('/currencyCoupon')
     }
+  },
+  mounted() {
+    this.addCouForm = this.editFromArr
   }
 }
 </script>
