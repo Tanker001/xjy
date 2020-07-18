@@ -94,10 +94,10 @@ export default {
         {
           id: 4,
           authName: '订单管理',
-          path: 'shop',
+          path: 'order',
           children: [
-            { id: 31, authName: '订单列表', path: 'shopInfo' },
-            { id: 32, authName: '订单统计', path: 'shopStyle' }
+            { id: 31, authName: '订单列表', path: 'orderlist' },
+            { id: 32, authName: '订单统计', path: 'ordercount' }
           ]
         },
         {
