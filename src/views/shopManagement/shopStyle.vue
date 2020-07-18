@@ -4,19 +4,25 @@
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>商铺管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商铺列表</el-breadcrumb-item>
+      <el-breadcrumb-item>商品列表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card round class="box-card">
       <el-row>
-        <el-col :span="8">
+        <el-col :span="4">
           <div class="box-card_one">
-            <span>店铺编号/名称</span>
-            <el-input placeholder="请输入内容" v-model="input" clearable></el-input>
+            <span>商品</span>
+            <el-input placeholder="请输入商品" v-model="input" clearable></el-input>
+          </div>
+        </el-col>
+        <el-col :span="4">
+          <div class="box-card_one">
+            <span>所属店铺</span>
+            <el-input placeholder="请输入所属店铺" v-model="input1" clearable></el-input>
           </div>
         </el-col>
         <el-col :span="8">
           <div class="box-card_one">
-            <span>行业</span>
+            <span>商品类别</span>
             <el-select v-model="value" placeholder="请选择">
               <el-option
                 v-for="item in options"
@@ -37,42 +43,31 @@
     </el-card>
     <div class="StoreInformation">
       <el-row>
-        <el-col :span="4">
+        <el-col :span="20">
           <div class="grid-content bg-purple">
-            <span>店铺数量:{{tableData.length}}</span>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple-light">
-            <span>共享店铺数量:</span>
-          </div>
-        </el-col>
-        <el-col :span="4">
-          <div class="grid-content bg-purple">
-            <span>销售总额:</span>
+            <el-button type="primary" round plain>导出</el-button>
           </div>
         </el-col>
       </el-row>
     </div>
     <el-card round class="box-card">
       <el-table border :data="tableData" style="width: 100%">
-        <el-table-column fixed prop="uid" label="店铺编号"></el-table-column>
-        <el-table-column prop="name" label="店铺名称"></el-table-column>
-        <el-table-column prop="industry" label="店铺行业"></el-table-column>
-        <el-table-column prop="address" label="店铺地址"></el-table-column>
-        <el-table-column prop="phone" label="联系电话"></el-table-column>
-        <el-table-column prop="tid" label="推广人ID"></el-table-column>
-        <el-table-column prop="equity_level" label="权益级别" #default="{ row }">
-          <!-- {{ row }} -->
-          <el-tag size="mini" v-if="row.equity_level===0">一级</el-tag>
-          <el-tag size="mini" type="success" v-else-if="row.equity_level===1">二级</el-tag>
-          <el-tag size="mini" type="warning" v-else>三级</el-tag>
-        </el-table-column>
-        <el-table-column prop="equity_Time" #default="{ row }" label="权益时限">{{ row.equity_Time }}/天</el-table-column>
+        <el-table-column fixed prop="uid" label="商品编号"></el-table-column>
+        <el-table-column prop="name" label="所属店铺"></el-table-column>
+        <el-table-column prop="industry" label="商品图"></el-table-column>
+        <el-table-column prop="address" label="商品名称"></el-table-column>
+        <el-table-column prop="phone" label="商品类型"></el-table-column>
+        <el-table-column prop="tid" label="成本价"></el-table-column>
+        <el-table-column prop="equity_level" label="原价" #default="{ row }">{{row.yuanjia}}/元</el-table-column>
+        <el-table-column prop="equity_Time" #default="{ row }" label="参与活动">{{ row.equity_Time }}/天</el-table-column>
         <el-table-column prop="sales_volume" label="销售额"></el-table-column>
         <el-table-column prop="operation_status" label="运营状态" #default="{ row }">
           <el-tag size="mini" v-if="row.operation_status===0">独立运营</el-tag>
           <el-tag size="mini" type="success" v-else-if="row.operation_status===1">共享运营</el-tag>
+        </el-table-column>
+        <el-table-column prop="status" #default="{ row }" label="推荐">
+          <el-tag size="mini" v-if="row.status===0">启用</el-tag>
+          <el-tag size="mini" type="success" v-else-if="row.status===1">停用</el-tag>
         </el-table-column>
         <el-table-column prop="status" #default="{ row }" label="状态">
           <el-tag size="mini" v-if="row.status===0">启用</el-tag>
@@ -88,7 +83,7 @@
           }})"
             ></el-button>
             <el-button type="success" icon="el-icon-check" circle></el-button>
-            <el-button type="danger" icon="el-icon-delete" @click="open" circle></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -102,6 +97,7 @@ export default {
   data() {
     return {
       input: '',
+      input1: '',
       options: [
         {
           value: '选项1',
@@ -121,27 +117,6 @@ export default {
     const { data: res } = await getGoodsList()
     this.tableData = res.list
     console.log(res)
-  },
-  methods: {
-    open() {
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
-    }
   }
 }
 </script>
@@ -165,6 +140,7 @@ export default {
 .StoreInformation {
   margin-left: 35px;
   margin-top: 20px;
+  text-align: right;
   margin-bottom: 25px;
 }
 .el-card {

@@ -4,6 +4,7 @@ import Home from '../views/Home/homepage.vue'
 import Login from '../views/Login'
 import ShopManagement from '../views/shopManagement'
 import Welcome from '../views/welcome'
+import Shopdetails from '../views/shopManagement/Shopdetails.vue'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -15,17 +16,23 @@ const routes = [{
   component: Home,
   redirect: '/welcome',
   children: [{
-    path: '/welcome',
-    component: Welcome
-  }, {
-    path: '/shopManagement',
-    component: ShopManagement
-  },
-  {
-    path: '/qqqqq',
-    component:
-      () => import('@/views/Ordermanagement')
-  }
+      path: '/welcome',
+      component: Welcome
+    }, {
+      path: '/shopManagement',
+      component: ShopManagement
+    }, {
+      path: '/shopdetails/:id',
+      name: 'Shopdetails',
+      component: Shopdetails
+    },
+    {
+      path: '/qqqqq',
+      component: () => import('@/views/Ordermanagement')
+    }, {
+      path: '/shopStyle',
+      component: () => import('@/views/shopManagement/shopStyle')
+    }
   ]
 }]
 
