@@ -7,3 +7,7 @@ export const getGoodsList = () => {
 export const getGoosli = () => {
   return request.get('/goods/ls')
 }
+
+export const getshopdetails = (userid) => {
+  return request.get(`/goods/shop/${userid}`)
+}
